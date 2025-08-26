@@ -14,7 +14,7 @@
 
     <!-- 城市列表容器 -->
     <div class="city-list-container">
-      <t-indexes :index-list="indexList" :sticky="false">
+      <t-indexes :index-list="indexList">
         <template v-for="group in cityGroupsList" :key="group.index">
           <t-indexes-anchor :index="group.index" />
           <t-cell-group>

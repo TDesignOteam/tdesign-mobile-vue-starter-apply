@@ -93,7 +93,8 @@ export const getDateRangeString = (date: Date[], split: string = '-') => {
 
 export const getAge = (date: string) => {
   const now = dayjs();
-  return now.diff(dayjs(date), 'year');
+  const diff = now.diff(dayjs(date), 'year');
+  return diff === 0 ? '-' : diff;
 };
 
 export const dateIncludes = (item: ActivityModel, date: Date[]) => {

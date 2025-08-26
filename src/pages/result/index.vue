@@ -12,7 +12,7 @@
         <div class="activity-details">
           <div>
             <time-icon size="16" color="#0052D9" />
-            <span class="activity-details-text">{{ dayjs(activity.date[0]).format('YYYY年MM月DD日') }}</span>
+            <span class="activity-details-text">{{ dayjs(activity?.date?.[0]).format('YYYY年MM月DD日') }}</span>
           </div>
           <div>
             <location-icon size="16" color="#0052D9" />

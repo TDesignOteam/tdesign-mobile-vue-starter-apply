@@ -276,7 +276,6 @@ export default [
     url: '/api/confirm-activity',
     method: 'post',
     response: ({ body }: { body: any }) => {
-      console.log(body);
       MyActivityList.push(body);
       return {
         code: 0,

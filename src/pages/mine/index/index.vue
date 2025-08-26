@@ -1,86 +1,72 @@
 <template>
-  <div class="container-view">
-    <div class="mine-card">
-      <t-avatar class="mine-card__avatar" size="large" :image="userInfo.avatar" alt=""></t-avatar>
-      <div class="mine-card__content">
-        <div class="mine-card__content-info">
-          <div class="mine-card__content-info-name">{{ userInfo.username }}</div>
-          <div class="mine-card__content-info-age_occupation">
-            <div v-show="userInfo.age !== 0">{{ userInfo.age }}岁</div>
-            <div v-show="userInfo.occupation !== ''" style="margin-left: 8px">
+  <div class="mine-page container-view">
+    <div class="mine-page__card">
+      <t-avatar class="mine-page__card-avatar" size="large" :image="userInfo.avatar" alt=""></t-avatar>
+      <div class="mine-page__card-content">
+        <div class="mine-page__card-info">
+          <div class="mine-page__card-name">{{ userInfo.username }}</div>
+          <div class="mine-page__card-tags">
+            <div v-show="userInfo.age !== 0" class="mine-page__card-tag">{{ userInfo.age }}岁</div>
+            <div v-show="userInfo.occupation !== ''" class="mine-page__card-tag" style="margin-left: 8px">
               {{ Occupation.find((item) => item.value === userInfo.occupation)?.label }}
             </div>
           </div>
         </div>
-        <div class="mine-card__content-edit" @click="onEdit"><edit-icon size="20px" /></div>
+        <div class="mine-page__card-edit" @click="onEdit"><edit-icon size="20px" /></div>
       </div>
     </div>
-    <div class="my-activity-list">
-      <t-tabs :value="currentValue" :list="tabList" class="my-activity-list__ttabs" @change="onChange">
+    <div class="mine-page__activity">
+      <t-tabs :value="currentValue" :list="tabList" class="mine-page__activity-tabs" @change="onChange">
         <t-tab-panel
           v-for="item in tabList"
           :key="item.value"
           :value="item.value"
           :badge-props="item.badgeProps"
-          class="my-activity-list__ttabs__panel"
+          class="mine-page__activity-panel"
         >
-          <t-list
-            :async-loading="activityLoading ? 'loading' : ''"
-            class="my-activity-list__ttabs__panel__tlist"
-            @scroll="onScroll"
-          >
+          <t-list :async-loading="activityLoading ? 'loading' : ''" class="mine-page__activity-list" @scroll="onScroll">
             <div
               v-for="cell in filterActivityList(allActivityList.list, currentValue)"
               :key="cell.id"
-              class="my-activity-list__ttabs__panel__tlist__item"
+              class="mine-page__activity-item"
               align="middle"
             >
-              <div class="my-activity-list__ttabs__panel__tlist__item-img">
+              <div class="mine-page__activity-item-img">
                 <img :src="cell.img" alt="" />
               </div>
-              <div class="my-activity-list__ttabs__panel__tlist__item-content">
-                <div class="my-activity-list__ttabs__panel__tlist__item-content-info">
-                  <div class="my-activity-list__ttabs__panel__tlist__item-content-info-name">{{ cell.name }}</div>
-                  <div class="my-activity-list__ttabs__panel__tlist__item-content-info-date">
+              <div class="mine-page__activity-item-content">
+                <div class="mine-page__activity-item-info">
+                  <div class="mine-page__activity-item-name">{{ cell.name }}</div>
+                  <div class="mine-page__activity-item-date">
                     {{ getEarlyDate_YMD(isArray(cell.date) ? cell.date : [cell.date]) }}
                   </div>
                 </div>
-                <div class="my-activity-list__ttabs__panel__tlist__item-content-footer">
+                <div class="mine-page__activity-item-footer">
                   <div
-                    class="my-activity-list__ttabs__panel__tlist__item-content-footer-status"
+                    class="mine-page__activity-item-status"
                     :style="{ color: cell.status ? '' : 'var(--td-success-color)' }"
                   >
                     {{ cell.status ? '已完成' : '待参加' }}
                   </div>
-                  <div
-                    v-if="cell.status"
-                    class="my-activity-list__ttabs__panel__tlist__item-content-footer-comment"
-                    @click="onComment"
-                  >
-                    去评价
-                  </div>
+                  <div v-if="cell.status" class="mine-page__activity-item-comment" @click="onComment">去评价</div>
                 </div>
               </div>
             </div>
             <template #footer>
-              <div
-                v-if="userInfo.userid === -1"
-                class="my-activity-list__ttabs__panel__tlist__item-click_to_login"
-                @click.stop="onLogin"
-              >
+              <div v-if="userInfo.userid === -1" class="mine-page__login-prompt" @click.stop="onLogin">
                 您还未登录，点击登录
               </div>
               <div
                 v-if="userInfo.userid !== -1 && isShowLoading && !isShowAll"
-                class="my-activity-list__ttabs__panel__tlist__item-empty"
+                class="mine-page__load-more"
                 @click.stop="() => onActivityLoad(false, true)"
               >
-                <empty class="my-activity-list__ttabs__panel__tlist__item-empty_img" />
-                <div class="my-activity-list__ttabs__panel__tlist__item-empty_title">加载更多</div>
+                <empty class="mine-page__load-more-icon" />
+                <div class="mine-page__load-more-text">加载更多</div>
               </div>
-              <div v-if="userInfo.userid !== -1 && isShowAll" class="my-activity-list__ttabs__panel__tlist__item-end">
+              <div v-if="userInfo.userid !== -1 && isShowAll" class="mine-page__list-end">
                 <div>
-                  <span style="margin: 0 8px; font-size: 30px; line-height: 12px">·</span>
+                  <span class="mine-page__list-end-text">我是有底线哒</span>
                 </div>
               </div>
             </template>
@@ -186,9 +172,9 @@ const filterActivityList: (arr: MyActivityList[], tabVal: TabValue) => MyActivit
     case '2':
       return arr;
     case '1':
-      return arr.filter((item) => item.status === 1);
+      return arr.filter((item) => item?.status === 1);
     case '0':
-      return arr.filter((item) => item.status === 0);
+      return arr.filter((item) => item?.status === 0);
   }
 };
 

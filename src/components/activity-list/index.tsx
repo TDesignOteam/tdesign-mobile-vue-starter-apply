@@ -28,6 +28,27 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const sortedData = computed(() => {
+      return props.data.sort((a, b) => {
+        if (props.sortBy === 'latest') {
+          return dayjs(getEarlyDate(a)).isBefore(getEarlyDate(b)) ? -1 : 1;
+        }
+        if (props.sortBy === 'max-evaluate') {
+          return b.evaluate - a.evaluate;
+        }
+        return 0;
+      });
+    });
+
+    const filteredData = computed(() => {
+      return sortedData.value.filter((i) => {
+        if (isFunction(props.filterBy)) {
+          return props.filterBy(i);
+        }
+        return true;
+      });
+    });
+
     const emptyNode = computed(() => {
       return (
         <div class="t-empty">
@@ -46,23 +67,6 @@ export default defineComponent({
     };
 
     const renderList = () => {
-      const sortedData = props.data.sort((a, b) => {
-        if (props.sortBy === 'latest') {
-          return dayjs(getEarlyDate(a)).isBefore(getEarlyDate(b)) ? -1 : 1;
-        }
-        if (props.sortBy === 'max-evaluate') {
-          return b.evaluate - a.evaluate;
-        }
-        return 0;
-      });
-
-      const filteredData = sortedData.filter((i) => {
-        if (isFunction(props.filterBy)) {
-          return props.filterBy(i);
-        }
-        return true;
-      });
-
       const getPrice = (item: ActivityModel) => {
         if (item.price === 'free') {
           return '免费活动';
@@ -70,7 +74,7 @@ export default defineComponent({
         return `¥${getMinPrice(item)}-¥${getMaxPrice(item)}`;
       };
 
-      const list = filteredData.map((item) => {
+      const list = filteredData.value.map((item) => {
         return (
           <div class="activity-list-item" onClick={() => handleItemClick(item.id)}>
             <div class="activity-list-item__image">
@@ -90,6 +94,7 @@ export default defineComponent({
 
       return list.length > 0 ? list : emptyNode.value;
     };
+
     return () => {
       return <>{renderList()}</>;
     };

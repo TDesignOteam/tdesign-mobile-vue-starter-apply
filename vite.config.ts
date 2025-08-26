@@ -47,7 +47,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       port: 52000,
       host: '0.0.0.0',
       proxy: {
-        [VITE_API_URL_PREFIX]: 'http://127.0.0.1:52100/',
+        [VITE_API_URL_PREFIX]: 'http://127.0.0.1:52000/',
       },
     },
   };

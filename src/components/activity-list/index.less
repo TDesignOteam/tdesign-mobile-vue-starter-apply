@@ -31,7 +31,10 @@
 
     &__content {
       padding: 16px 16px 12px;
-      width: 100%;
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
 
       &-title {
         font-size: 14px;
@@ -40,9 +43,10 @@
         line-height: 22px;
         margin-bottom: 8px;
         white-space: nowrap;
-        width: 92%;
-        overflow-x: hidden;
+        overflow: hidden;
         text-overflow: ellipsis;
+        width: 100%;
+        max-width: 100%;
       }
 
       &-evaluate {
@@ -50,6 +54,7 @@
         align-items: center;
         gap: 8px;
         margin-bottom: 20px;
+        white-space: nowrap;
 
         .evaluate-text {
           color: #e37318;

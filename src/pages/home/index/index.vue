@@ -273,7 +273,7 @@ const filterActivityItem = (item: ActivityModel) => {
   }
 
   // 活动形式
-  if (result && filterOptions.value.type) {
+  if (result && filterOptions.value.type && filterOptions.value.type.length > 0) {
     result = includes(item.type, filterOptions.value.type);
   }
 
@@ -283,11 +283,13 @@ const filterActivityItem = (item: ActivityModel) => {
     const itemMinPrice = getMinPrice(item);
     const itemMaxPrice = getMaxPrice(item);
 
-    result = item.price === 'free' || (itemMinPrice >= minPrice && itemMaxPrice <= maxPrice);
+    result =
+      (Number(itemMinPrice) >= minPrice && Number(itemMaxPrice) <= maxPrice) ||
+      (Number(itemMinPrice) <= maxPrice && Number(itemMaxPrice) >= minPrice);
   }
 
   // 日期范围
-  if (result && chooseDate.value && chooseDate.value.length === 2) {
+  if (result && chooseDate.value && chooseDate.value.length === 2 && filterOptions.value?.date !== '') {
     result = dateIncludes(item, chooseDate.value);
   }
 

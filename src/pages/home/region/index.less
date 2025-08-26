@@ -10,6 +10,7 @@
 .region-container {
   background: var(--td-bg-color-container);
   overflow-y: hidden;
+  touch-action: none;
 }
 
 .current-location {
@@ -35,11 +36,8 @@
 }
 
 .city-list-container {
-  height: calc(100vh - 120px);
-  overflow-y: scroll;
-
   .t-indexes {
-    overflow-y: unset;
+    height: calc(100vh - 108px);
   }
 }
 

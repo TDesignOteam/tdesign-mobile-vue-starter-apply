@@ -13,20 +13,12 @@ const defaultUsers = [
   {
     id: 1,
     name: '蔡宣轩',
-    birthday: '01-01',
+    birthday: '2001-01-01',
+    avatar: '/assets/image/avatar.png',
     phone: '12345678910',
     identityCard: 'ABCD',
     email: 'mail@example.com',
-    occupation: '设计师',
-  },
-  {
-    id: 2,
-    name: '蔡晓萱',
-    birthday: '01-02',
-    phone: '12345678910',
-    identityCard: 'GHJI',
-    email: 'mail2@example.com',
-    occupation: '计算机从业者',
+    occupation: 'art-practitioners',
   },
 ];
 
