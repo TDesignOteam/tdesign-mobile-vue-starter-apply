@@ -23,7 +23,7 @@ const btns: BtnConfig[] = [
     size: 'large',
     type: 'submit',
     block: true,
-    t: 'components.form.submitBtn',
+    t: 'components.form.confirmBtn',
   },
 ];
 

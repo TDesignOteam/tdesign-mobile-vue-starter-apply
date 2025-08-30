@@ -4,11 +4,11 @@
     <div class="current-location">
       <div class="location-info">
         <location-icon size="20px" color="#666" />
-        <span class="city-name">{{ currentLocation.city || '定位中...' }}</span>
+        <span class="city-name">{{ currentLocation.city || t('pages.home.region.updating') }}</span>
         <t-icon v-if="currentLocation.isLocating" name="loading" size="16" class="loading-icon" />
       </div>
       <t-button size="extra-small" shape="round" :disabled="currentLocation.isLocating" @click="updateLocation">
-        {{ currentLocation.isLocating ? '定位中...' : '更新定位' }}
+        {{ currentLocation.isLocating ? t('pages.home.region.updating') : t('pages.home.region.updateLocation') }}
       </t-button>
     </div>
 
@@ -42,6 +42,7 @@ import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { cityGroup, indexList } from '@/constants';
+import { t } from '@/locales';
 import { useCityStore } from '@/store/modules/city';
 import type { City } from '@/types/interface';
 

@@ -8,8 +8,11 @@ export default [
     children: [
       {
         path: 'confirm',
-        name: '购买确认',
+        name: 'orderConfirm',
         component: () => import('@/pages/order/confirm/index.vue'),
+        meta: {
+          title: { zh_CN: '购买确认', en_US: 'BuyConfirm' },
+        },
       },
     ],
   },

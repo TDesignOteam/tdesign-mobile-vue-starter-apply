@@ -1,26 +1,30 @@
 export default {
-  403: {
-    tips: 'sorry, you don not have permission to access this page',
-    back: 'Back to homepage',
-  },
-  404: {
-    subtitle: 'Sorry, the page is not found',
-    back: 'Back to homepage',
-  },
-  500: {
-    subtitle: 'Sorry, the server is error',
-    back: 'Back to homepage',
+  success: {
+    title: 'Success',
+    message: 'Operation completed successfully',
+    back: 'Back to Home',
+    detail: 'View Details',
   },
   fail: {
-    title: 'Create fail',
-    subtitle: 'Sorry, your project creation has failed',
-    back: 'Back to homepage',
-    modify: 'Back to modify',
+    title: 'Failed',
+    message: 'Operation failed, please try again',
+    back: 'Back to Home',
+    retry: 'Try Again',
   },
-  success: {
-    title: 'Project is created',
-    subtitle: 'Contact the person in charge of distributing the application',
-    back: 'Back to homepage',
-    progress: 'Check Progress',
+  notFound: {
+    title: '404',
+    message: 'Sorry, the page you visited does not exist',
+    back: 'Back to Home',
+  },
+  serverError: {
+    title: '500',
+    message: 'Sorry, the server is reporting an error',
+    back: 'Back to Home',
+    retry: 'Refresh',
+  },
+  empty: {
+    title: 'No Data',
+    message: 'No relevant data found',
+    back: 'Back to Home',
   },
 };

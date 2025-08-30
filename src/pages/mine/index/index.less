@@ -30,7 +30,7 @@
   &__card-info {
     margin-left: 16px;
     height: 54px;
-    .flex-center(flex-end, flex-start);
+    .flex-center(center, flex-start);
 
     flex-direction: column;
   }
@@ -185,10 +185,11 @@
   &__login-prompt {
     .flex-center();
 
-    color: var(--td-brand-color-6);
-    font-size: var(--td-font-size-title-large);
-    line-height: var(--td-line-height-link-medium);
-    margin: 16px 0;
+    margin-top: 24px;
+    padding-bottom: 16px;
+    color: var(--td-text-color-disabled);
+    font-size: var(--td-font-size-link-small);
+    line-height: var(--td-line-height-link-small);
   }
 
   &__load-more {

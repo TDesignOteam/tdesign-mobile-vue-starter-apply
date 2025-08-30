@@ -18,10 +18,10 @@
     <!-- 人员信息 -->
     <div class="section-container">
       <div class="section-header">
-        <div class="section-title">人员信息</div>
+        <div class="section-title">{{ t('pages.order.detail.personList') }}</div>
         <t-button size="extra-small" shape="round" @click="onAddPerson">
           <add-icon size="16px" />
-          <span>增加人员</span>
+          <span>{{ t('pages.order.detail.addPerson') }}</span>
         </t-button>
       </div>
       <div class="attendees-list">
@@ -42,7 +42,7 @@
     <!-- 票类场次 -->
     <div class="section-container">
       <div class="section-header">
-        <div class="section-title">票类场次</div>
+        <div class="section-title">{{ t('pages.order.detail.ticketTypes') }}</div>
       </div>
       <div>
         <t-checkbox-group v-model:value="formData.date" borderless>
@@ -62,7 +62,7 @@
     <!-- 票档价格 -->
     <div class="section-container">
       <div class="section-header">
-        <div class="section-title">票档价格</div>
+        <div class="section-title">{{ t('pages.order.detail.ticketPrice') }}</div>
       </div>
       <div class="ticket-price-list">
         <t-checkbox-group v-model:value="formData.price" borderless>
@@ -97,10 +97,12 @@
     <!-- 底部按钮栏 -->
     <div class="bottom-btn">
       <div class="price-info">
-        <span>待支付:</span>
+        <span>{{ t('pages.order.detail.pendingPay') }}:</span>
         <span class="total-price">¥{{ totalPrice }}</span>
       </div>
-      <t-button class="btn" theme="primary" size="large" @click="onConfirm">确认购买</t-button>
+      <t-button class="btn" theme="primary" size="large" @click="onConfirm">{{
+        t('pages.order.detail.confirmBuy')
+      }}</t-button>
     </div>
   </div>
 </template>
@@ -113,6 +115,7 @@ import { useRouter } from 'vue-router';
 
 import { setMyActivity } from '@/api/list';
 import type { ActivityPrice } from '@/api/model/listModel';
+import { t } from '@/locales';
 import { useUsersStore } from '@/store';
 import { useResultStore } from '@/store/modules/result';
 import { getDateRangeYMD } from '@/utils/activity/getDate';

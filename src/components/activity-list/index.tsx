@@ -83,7 +83,7 @@ export default defineComponent({
             <div class="activity-list-item__content">
               <div class="activity-list-item__content-title">{item.name}</div>
               <div class="activity-list-item__content-evaluate">
-                <t-rate value={item.evaluate} max="5" size="16" placement="" allow-half />
+                <t-rate value={item.evaluate} max="5" size="16" allow-half />
                 <span class="evaluate-text">{item.evaluate}分</span>
               </div>
               <div class="activity-list-item__content-price">{getPrice(item)}</div>

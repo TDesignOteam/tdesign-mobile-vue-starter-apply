@@ -1,0 +1,25 @@
+export default {
+  noAccount: 'No account?',
+  existAccount: 'Already have an account?',
+  createAccount: 'Register new account',
+  remember: 'Remember me',
+  forget: 'Forget account',
+  signIn: 'Login',
+  register: 'Register',
+  refresh: 'Refresh',
+  accountLogin: 'Use account login',
+  phoneLogin: 'Use phone login',
+  input: {
+    account: 'Please enter account',
+    password: 'Please enter login password',
+    phone: 'Please enter phone number',
+    verification: 'Please enter verification code',
+  },
+  required: {
+    account: 'Account is required',
+    phone: 'Phone number is required',
+    password: 'Password is required',
+    verification: 'Verification code is required',
+  },
+  sendVerification: 'Send verification code',
+};

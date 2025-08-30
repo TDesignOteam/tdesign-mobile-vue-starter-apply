@@ -27,10 +27,17 @@ div :has(.navbar-placeholder):has(.t-tab-bar) {
   }
 }
 
-// 全局禁用rate组件的点击放大效果
-.t-rate__icon {
-  &.t-rate__icon--current {
-    --td-rate-icon-scale: 1;
+.t-rate {
+  &__icon {
+    // 全局禁用rate组件的点击放大效果
+    &.t-rate__icon--current {
+      --td-rate-icon-scale: 1;
+    }
+  }
+
+  // 全局禁用rate组件的半选弹窗
+  &__tips {
+    display: none;
   }
 }
 

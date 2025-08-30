@@ -12,7 +12,12 @@
 
         <!-- 搜索框 -->
         <div class="search-bar">
-          <t-search v-model="value" :clearable="true" shape="round" placeholder="搜索活动"></t-search>
+          <t-search
+            v-model="value"
+            :clearable="true"
+            shape="round"
+            :placeholder="t('pages.home.search.placeholder')"
+          ></t-search>
         </div>
       </div>
     </t-sticky>
@@ -20,7 +25,7 @@
     <!-- 热门推荐部分 -->
     <div class="hot-recommendations">
       <div class="title-container">
-        <div class="title-text">热门推荐</div>
+        <div class="title-text">{{ t('pages.home.recommend') }}</div>
       </div>
       <div class="swiper-wrapper">
         <div class="swiper-container">
@@ -42,7 +47,7 @@
     <t-sticky :offset-top="104" :z-index="100">
       <div class="sticky-header">
         <div class="title-container">
-          <div class="title-text">全部活动</div>
+          <div class="title-text">{{ t('pages.home.allList') }}</div>
         </div>
         <div class="activity-nav">
           <t-tabs v-model="sortBy" :list="activityTabs" :split="false" class="hidden-track" style="width: 100%">
@@ -51,7 +56,7 @@
           <div class="filter-btn">
             <div @click="filterPopupVisible = true">
               <filter-icon size="18px" />
-              <span>筛选</span>
+              <span>{{ t('pages.home.filter.text') }}</span>
             </div>
           </div>
         </div>
@@ -67,7 +72,7 @@
   <t-popup v-model="filterPopupVisible" placement="bottom">
     <div :class="`${prefix}-filter-view`">
       <div :class="`${prefix}-filter-view__header`">
-        <div class="title">全部筛选</div>
+        <div class="title">{{ t('pages.home.filter.title') }}</div>
         <div class="close-icon" @click="filterPopupVisible = false"><close-icon size="24px" /></div>
       </div>
       <div :class="`${prefix}-filter-view__body`">
@@ -128,6 +133,7 @@ import FormRender from '@/components/form';
 import type { BtnConfig, FormItems } from '@/components/form/type';
 import { ActivityField, ActivityType } from '@/config/consts';
 import { prefix } from '@/config/global';
+import { t } from '@/locales';
 import { useCityStore } from '@/store';
 import { dateIncludes, getDateRangeString } from '@/utils/activity/getDate';
 import { getMaxPrice, getMinPrice } from '@/utils/activity/getPrice';
@@ -160,11 +166,11 @@ const sortBy = ref('latest');
 const activityTabs = [
   {
     value: 'latest',
-    label: '最新活动',
+    label: t('pages.home.filter.latest'),
   },
   {
     value: 'max-evaluate',
-    label: '高分活动',
+    label: t('pages.home.filter.highScore'),
   },
 ];
 const filterOptions = ref<{ [k: string]: any }>({});
@@ -175,7 +181,7 @@ const filterPopupVisible = ref(false);
 const formOptions: FormItems[] = [
   {
     id: 'field',
-    label: '面向领域',
+    label: t('pages.home.filter.field'),
     type: 'check-tag',
     class: 'hidden-divider',
     componentProps: {
@@ -184,7 +190,7 @@ const formOptions: FormItems[] = [
   },
   {
     id: 'type',
-    label: '活动形式',
+    label: t('pages.home.filter.type'),
     type: 'check-tag',
     componentProps: {
       options: ActivityType,
@@ -192,7 +198,7 @@ const formOptions: FormItems[] = [
   },
   {
     id: 'date',
-    label: '活动日期',
+    label: t('pages.home.filter.date'),
     type: 'custom',
     component: () => {
       return (
@@ -207,7 +213,7 @@ const formOptions: FormItems[] = [
   },
   {
     id: 'price',
-    label: '价格范围（元）',
+    label: t('pages.home.filter.price'),
     type: 'slider',
     componentProps: {
       min: 0,

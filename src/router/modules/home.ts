@@ -17,7 +17,7 @@ export default [
           navBgColor: 'transparent',
           navFgColor: 'transparent',
           tabbar: {
-            label: t('layout.tabbar.index'),
+            label: t('layout.tabbar.home'),
             icon: 'home',
             index: 0,
           },
@@ -28,6 +28,22 @@ export default [
         name: 'ChooseRegion',
         component: () => import('@/pages/home/region/index.vue'),
         meta: { title: { zh_CN: '选择城市', en_US: 'ChooseRegion' } },
+      },
+    ],
+  },
+  {
+    path: '/login',
+    component: Layout,
+    name: 'login',
+    children: [
+      {
+        path: '',
+        name: 'LoginView',
+        component: () => import('@/pages/login/index.vue'),
+        meta: {
+          title: { zh_CN: '登录', en_US: 'Login' },
+          navBgColor: 'transparent',
+        },
       },
     ],
   },

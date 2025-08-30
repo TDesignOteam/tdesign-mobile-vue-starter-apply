@@ -4,10 +4,19 @@
       <t-avatar class="mine-page__card-avatar" size="large" :image="userInfo.avatar" alt=""></t-avatar>
       <div class="mine-page__card-content">
         <div class="mine-page__card-info">
-          <div class="mine-page__card-name">{{ userInfo.username }}</div>
-          <div class="mine-page__card-tags">
-            <div v-show="userInfo.age !== 0" class="mine-page__card-tag">{{ userInfo.age }}岁</div>
-            <div v-show="userInfo.occupation !== ''" class="mine-page__card-tag" style="margin-left: 8px">
+          <div
+            class="mine-page__card-name"
+            @click.stop="
+              () => {
+                userInfo.userid === -1 && onLogin();
+              }
+            "
+          >
+            {{ userInfo.username || t('pages.mine.clickLogin') }}
+          </div>
+          <div v-if="userInfo.age !== 0 || userInfo.occupation !== ''" class="mine-page__card-tags">
+            <div v-if="userInfo.age !== 0" class="mine-page__card-tag">{{ userInfo.age }}岁</div>
+            <div v-if="userInfo.occupation !== ''" class="mine-page__card-tag" style="margin-left: 8px">
               {{ Occupation.find((item) => item.value === userInfo.occupation)?.label }}
             </div>
           </div>
@@ -53,8 +62,8 @@
               </div>
             </div>
             <template #footer>
-              <div v-if="userInfo.userid === -1" class="mine-page__login-prompt" @click.stop="onLogin">
-                您还未登录，点击登录
+              <div v-if="userInfo.userid === -1" class="mine-page__login-prompt">
+                {{ t('pages.mine.notLoginAttend') }}
               </div>
               <div
                 v-if="userInfo.userid !== -1 && isShowLoading && !isShowAll"
@@ -88,8 +97,12 @@ import { getMyActivityList, getUserInfo } from '@/api/list';
 import type { MyActivityList, MyActivityListResult, UserInfoResult } from '@/api/model/listModel';
 import Empty from '@/components/result/Empty';
 import { Occupation } from '@/config/consts';
+import { t } from '@/locales';
+import router from '@/router';
+import { useUsersStore } from '@/store';
 import { getEarlyDate_YMD } from '@/utils/activity/getDate';
 
+const usersStore = useUsersStore();
 // 用户信息
 const userInfo = ref<UserInfoResult>({ userid: -1, username: '', age: 0, avatar: '', occupation: '' });
 // 分页加载活动列表
@@ -110,22 +123,22 @@ const currentValue = ref<TabValue>('0');
 const tabList = computed(() => [
   {
     value: '0',
-    label: '待参加',
+    label: t('pages.mine.myActivity.toAttend'),
     badgeProps: { dot: badge.value, offset: [-4, 1] },
   },
   {
     value: '1',
-    label: '已完成',
+    label: t('pages.mine.myActivity.completed'),
   },
   {
     value: '2',
-    label: '全部活动',
+    label: t('pages.mine.myActivity.all'),
   },
 ]);
 
 // 点击蓝字登录时触发
 const onLogin = () => {
-  console.log('登录 逻辑需要自行开发～');
+  router.push('login');
 };
 
 // 点击编辑icon触发
@@ -248,9 +261,12 @@ const onActivityLoad = (isRefresh?: boolean, loadMore = false) => {
 
 // 加载用户信息
 const onUserInfoLoad = async () => {
-  const res = await getUserInfo();
-  userInfo.value = res;
-  onActivityLoad();
+  // 存在登录信息时，请求用户信息
+  const isLogin = usersStore.checkLogin();
+  if (isLogin) {
+    userInfo.value = await getUserInfo();
+    onActivityLoad();
+  }
 };
 
 onMounted(() => {

@@ -1,26 +1,30 @@
 export default {
-  403: {
-    tips: '抱歉，您无权限访问此页面',
+  success: {
+    title: '成功',
+    message: '操作已成功完成',
     back: '返回首页',
-  },
-  404: {
-    subtitle: '抱歉，您访问的页面不存在',
-    back: '返回首页',
-  },
-  500: {
-    subtitle: '抱歉，服务器出错了',
-    back: '返回首页',
+    detail: '查看详情',
   },
   fail: {
-    title: '创建失败',
-    subtitle: '抱歉，您的项目创建失败，企业微信联系检查创建者权限，或返回修改。',
-    back: '回到首页',
-    modify: '返回修改',
+    title: '失败',
+    message: '操作失败，请重试',
+    back: '返回首页',
+    retry: '重试',
   },
-  success: {
-    title: '项目已创建成功',
-    subtitle: '可以联系负责人分发应用',
-    back: '回到首页',
-    progress: '查看进度',
+  notFound: {
+    title: '404',
+    message: '抱歉，您访问的页面不存在',
+    back: '返回首页',
+  },
+  serverError: {
+    title: '500',
+    message: '抱歉，服务器出错了',
+    back: '返回首页',
+    retry: '刷新',
+  },
+  empty: {
+    title: '暂无数据',
+    message: '没有找到相关数据',
+    back: '返回首页',
   },
 };
