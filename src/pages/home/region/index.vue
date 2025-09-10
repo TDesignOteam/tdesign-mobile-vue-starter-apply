@@ -1,11 +1,11 @@
 <template>
-  <div class="region-container container-view">
+  <div class="region-page container-view">
     <!-- 顶部当前定位信息 -->
-    <div class="current-location">
-      <div class="location-info">
+    <div class="region-page__location-header">
+      <div class="region-page__location-info">
         <location-icon size="20px" color="#666" />
-        <span class="city-name">{{ currentLocation.city || t('pages.home.region.updating') }}</span>
-        <t-icon v-if="currentLocation.isLocating" name="loading" size="16" class="loading-icon" />
+        <span class="region-page__city-name">{{ currentLocation.city || t('pages.home.region.updating') }}</span>
+        <t-icon v-if="currentLocation.isLocating" name="loading" size="16" class="region-page__loading-icon" />
       </div>
       <t-button size="extra-small" shape="round" :disabled="currentLocation.isLocating" @click="updateLocation">
         {{ currentLocation.isLocating ? t('pages.home.region.updating') : t('pages.home.region.updateLocation') }}
@@ -13,7 +13,7 @@
     </div>
 
     <!-- 城市列表容器 -->
-    <div class="city-list-container">
+    <div class="region-page__city-list">
       <t-indexes :index-list="indexList">
         <template v-for="group in cityGroupsList" :key="group.index">
           <t-indexes-anchor :index="group.index" />

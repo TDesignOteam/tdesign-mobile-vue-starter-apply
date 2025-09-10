@@ -4,12 +4,12 @@
   <div v-else-if="!activityDetail" class="not-found-container">未找到该活动信息。</div>
 
   <!-- 仅在成功获取数据后渲染主内容 -->
-  <div v-else class="activity-detail" :class="{ 'container-lock': isExpanded }">
-    <div class="content-wrapper">
+  <div v-else class="activity-page" :class="{ 'activity-page--locked': isExpanded }">
+    <div class="activity-page__content">
       <!-- 活动封面图 -->
-      <div class="cover-image-container">
+      <div class="activity-page__cover">
         <t-image
-          class="cover-image"
+          class="activity-page__cover-image"
           fit="cover"
           :src="activityDetail.fullImg || activityDetail.img"
           :style="{ width: '100%', height: '200px' }"
@@ -17,8 +17,8 @@
       </div>
 
       <!-- 活动嘉宾轮播 -->
-      <div class="swiper-wrapper">
-        <h3 class="activity-title">{{ t('pages.activity.activityGuest') }}</h3>
+      <div class="activity-page__swiper">
+        <h3 class="activity-page__section-title">{{ t('pages.activity.activityGuest') }}</h3>
         <div
           v-if="!activityDetail?.guest || activityDetail?.guest?.length === 0"
           class="t-empty"
@@ -31,7 +31,7 @@
           <empty class="t-empty__img" />
           <span style="color: var(--td-text-color-anti)">{{ t('components.empty.text') }}</span>
         </div>
-        <div class="swiper-container">
+        <div class="activity-page__swiper-container">
           <t-swiper
             :navigation="{ type: 'dots', placement: 'outside' }"
             :autoplay="false"
@@ -48,8 +48,8 @@
       </div>
 
       <!-- 活动会场轮播 -->
-      <div class="swiper-wrapper venue-swiper">
-        <h3 class="activity-title">{{ t('pages.activity.activityVenue') }}</h3>
+      <div class="activity-page__swiper activity-page__swiper--venue">
+        <h3 class="activity-page__section-title">{{ t('pages.activity.activityVenue') }}</h3>
         <div
           v-if="!activityDetail?.venue || activityDetail?.venue?.length === 0"
           class="t-empty"
@@ -62,7 +62,7 @@
           <empty class="t-empty__img" />
           <span style="color: var(--td-text-color-anti)">{{ t('components.empty.text') }}</span>
         </div>
-        <div class="swiper-container">
+        <div class="activity-page__swiper-container">
           <t-swiper
             :navigation="{ type: 'dots', placement: 'outside' }"
             :autoplay="false"
@@ -82,28 +82,39 @@
     <!-- 抽屉 -->
     <div style="position: fixed; bottom: 0; width: 100%">
       <div
-        class="bottom-drawer"
-        :class="{ 'is-expanded': isExpanded, 'no-transition': isDragging }"
+        class="drawer"
+        :class="{ 'drawer--expanded': isExpanded, 'drawer--dragging': isDragging }"
         :style="{ height: `${drawerHeight}px` }"
       >
         <div
-          class="drawer-handle"
-          :class="{ dragging: isDragging }"
+          class="drawer__handle"
+          :class="{ 'drawer__handle--dragging': isDragging }"
           @mousedown="onDragStart"
           @touchstart.prevent="onDragStart"
         >
-          <img src="/assets/image/union.png" alt="弧形装饰" class="drawer-arc-img" :class="{ hide: isExpanded }" />
-          <div class="drawer-arrow-container" :class="{ expanded: isExpanded, collapsed: !isExpanded }">
-            <chevron-down-icon v-if="isExpanded" class="drawer-arrow-icon" />
-            <chevron-up-icon v-else class="drawer-arrow-icon" />
+          <img
+            src="/assets/image/union.png"
+            alt="弧形装饰"
+            class="drawer__arc-image"
+            :class="{ 'drawer__arc-image--hidden': isExpanded }"
+          />
+          <div
+            class="drawer__arrow-container"
+            :class="{
+              'drawer__arrow-container--expanded': isExpanded,
+              'drawer__arrow-container--collapsed': !isExpanded,
+            }"
+          >
+            <chevron-down-icon v-if="isExpanded" class="drawer__arrow-icon" />
+            <chevron-up-icon v-else class="drawer__arrow-icon" />
           </div>
         </div>
-        <div class="drawer-content" @touchmove="onDrawerTouchMove" @wheel.stop>
+        <div class="drawer__content" @touchmove="onDrawerTouchMove" @wheel.stop>
           <div class="activity-info-wrapper">
-            <div class="container">
-              <h1 class="activity-main-title">{{ activityDetail.name }}</h1>
+            <div class="drawer__container">
+              <h1 class="drawer__main-title">{{ activityDetail.name }}</h1>
 
-              <div class="interested-section split">
+              <div class="drawer__interested-section drawer__split">
                 <t-avatar-group size="small" cascading="left-up" :max="5">
                   <t-avatar
                     v-for="(url, index) in activityInterested"
@@ -112,21 +123,21 @@
                     :image="url.avatar"
                   ></t-avatar>
                 </t-avatar-group>
-                <span class="interested-count">
+                <span class="drawer__interested-count">
                   {{ activityDetail.interested || 0 }} {{ t('pages.activity.howManyInterested') }}
                 </span>
               </div>
 
               <!-- 时间与地点 -->
-              <div class="info-block split">
-                <div class="info-row">
+              <div class="drawer__info-block drawer__split">
+                <div class="drawer__info-row">
                   <time-icon size="20px" />
                   <span>{{ t('pages.activity.time') }}：{{ getDateRangeYMD(activityDetail) }}</span>
                 </div>
-                <div class="info-row">
+                <div class="drawer__info-row">
                   <location-icon size="20px" />
                   <span>{{ t('pages.activity.place') }}：{{ activityDetail.place || '-' }}</span>
-                  <t-button theme="light" size="extra-small" class="nav-button">
+                  <t-button theme="light" size="extra-small" class="drawer__nav-button">
                     {{ t('pages.activity.navigationBtn') }}
                   </t-button>
                 </div>
@@ -134,21 +145,23 @@
             </div>
 
             <!-- 活动评价 -->
-            <div class="rating-section">
-              <div class="section-header">
-                <h2 class="section-title">{{ t('pages.activity.activityComments') }}({{ activityReviews.length }})</h2>
-                <div class="rating-display">
+            <div class="drawer__rating-section">
+              <div class="drawer__section-header">
+                <h2 class="drawer__section-title">
+                  {{ t('pages.activity.activityComments') }}({{ activityReviews.length }})
+                </h2>
+                <div class="drawer__rating-display">
                   <t-rate :value="activityDetail.evaluate" size="20" show-text allow-half />
                 </div>
               </div>
-              <div class="reviews-scroll-container">
+              <div class="drawer__reviews-container">
                 <t-cell
                   v-for="review in activityReviews"
                   :key="review.id"
                   :title="review.user"
                   :description="review.content"
                   :bordered="false"
-                  class="review-cell"
+                  class="drawer__review-cell"
                 >
                   <template #leftIcon>
                     <t-avatar shape="circle" :image="review.avatar" />
@@ -158,11 +171,13 @@
             </div>
 
             <!-- 活动介绍 -->
-            <div class="intro-section container">
-              <div class="section-header">
-                <h2 class="section-title">{{ t('pages.activity.activityIntroduction') }}</h2>
+            <div class="drawer__container">
+              <div class="drawer__section-header">
+                <h2 class="drawer__section-title">{{ t('pages.activity.activityIntroduction') }}</h2>
               </div>
-              <p class="intro-paragraph">{{ activityDetail.introduce || t('pages.activity.emptyIntroduction') }}</p>
+              <p class="drawer__intro-paragraph">
+                {{ activityDetail.introduce || t('pages.activity.emptyIntroduction') }}
+              </p>
             </div>
           </div>
         </div>
@@ -171,17 +186,23 @@
       <!-- 底部操作栏 -->
       <div class="bottom-bar">
         <div style="display: flex; flex-direction: row">
-          <div class="action-item" :class="{ favorited: isFavorited }" @click="handleFavoriteClick">
-            <heart-filled-icon v-if="isFavorited" size="24" />
+          <div
+            class="bottom-bar__action"
+            :class="{ 'bottom-bar__action--favorited': isFavorite }"
+            @click="handleFavoriteClick"
+          >
+            <heart-filled-icon v-if="isFavorite" size="24" />
             <heart-icon v-else size="24" />
-            <span>{{ isFavorited ? t('pages.activity.liked') : t('pages.activity.like') }}</span>
+            <span class="bottom-bar__action-text">{{
+              isFavorite ? t('pages.activity.liked') : t('pages.activity.like')
+            }}</span>
           </div>
-          <div class="action-item" @click="handleShareClick">
+          <div class="bottom-bar__action" @click="handleShareClick">
             <share-icon size="24" />
-            <span>{{ t('pages.activity.share') }}</span>
+            <span class="bottom-bar__action-text">{{ t('pages.activity.share') }}</span>
           </div>
         </div>
-        <t-button theme="primary" shape="rectangle" class="buy-button" @click="handleBuyClick">{{
+        <t-button theme="primary" shape="rectangle" class="bottom-bar__buy-button" @click="handleBuyClick">{{
           formattedPrice
         }}</t-button>
       </div>
@@ -264,10 +285,10 @@ const formattedPrice = computed(() => {
   return `立即购买 ¥${minPrice}-¥${maxPrice}`;
 });
 
-// --- 底部操作栏逻辑  ---
-const isFavorited = ref(false);
+// 底部操作栏逻辑
+const isFavorite = ref(false);
 const handleFavoriteClick = () => {
-  isFavorited.value = !isFavorited.value;
+  isFavorite.value = !isFavorite.value;
 };
 const handleShareClick = () => console.log('触发分享');
 const handleBuyClick = () => {
@@ -275,17 +296,20 @@ const handleBuyClick = () => {
   router.push({ path: '/order/confirm' });
 };
 
-// --- 抽屉交互逻辑  ---
+// 抽屉交互逻辑
 const MIN_DRAWER_HEIGHT = 20;
 const MAX_DRAWER_HEIGHT = window.innerHeight * 0.6;
 const drawerHeight = ref(MAX_DRAWER_HEIGHT);
 const SNAP_THRESHOLD = (MIN_DRAWER_HEIGHT + MAX_DRAWER_HEIGHT) / 2;
+const CLICK_DRAG_THRESHOLD = 5;
+
 const isExpanded = computed(() => drawerHeight.value > MIN_DRAWER_HEIGHT);
 const isDragging = ref(false);
+
 let startY = 0;
 let startHeight = 0;
 let movedDistance = 0;
-const CLICK_DRAG_THRESHOLD = 5;
+
 const getClientY = (e: MouseEvent | TouchEvent) => ('touches' in e ? e.touches[0].clientY : e.clientY);
 const toggleDrawer = () => {
   drawerHeight.value = isExpanded.value ? MIN_DRAWER_HEIGHT : MAX_DRAWER_HEIGHT;

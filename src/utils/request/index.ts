@@ -5,8 +5,8 @@ import merge from 'lodash/merge';
 
 import { ContentTypeEnum } from '@/constants';
 
-import { VAxios } from './Axios';
-import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
+import { VAxios } from './axios';
+import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { formatRequestDate, joinTimestamp, setObjToUrlParams } from './utils';
 
 const env = import.meta.env.MODE || 'development';

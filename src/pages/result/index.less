@@ -5,111 +5,108 @@
   margin: 0 auto;
   position: relative;
 
-  .result-status {
+  &__status {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 24px 0;
 
-    .status-title {
+    &-title {
       font-size: 20px;
       font-weight: 600;
       line-height: 28px;
       margin-top: 8px;
     }
   }
-}
 
-.activity-card {
-  height: 282px;
-  border-radius: 12px;
-  background: var(--td-bg-color-container);
-  box-shadow: var(--td-shadow-3);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  padding: 16px;
-
-  .activity-img {
-    border-radius: 9.06px;
-    object-fit: cover;
-  }
-
-  .activity-title {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 26px;
-  }
-
-  .activity-info {
-    margin-top: 16.56px;
-  }
-
-  .activity-details {
+  &__activity-card {
+    height: 282px;
+    border-radius: 12px;
+    background: var(--td-bg-color-container);
+    box-shadow: var(--td-shadow-3);
     display: flex;
-    flex-direction: row;
-    gap: 16px;
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 16px;
 
-    &-text {
-      margin-left: 4px;
+    &-image {
+      border-radius: 9.06px;
+      object-fit: cover;
     }
-  }
-}
 
-.applicant-wrapper {
-  margin-top: 24px;
+    &-info {
+      margin-top: 16.56px;
+    }
 
-  .applicant-title {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-  }
+    &-title {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 26px;
+    }
 
-  .applicant-list {
-    margin-top: 12px;
-    max-height: 100px;
-    overflow: scroll;
-
-    .user-cell-list {
+    &-details {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+      flex-direction: row;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 20px;
 
-    .t-cell {
-      border-radius: 9px;
-      height: 82px;
+      &-text {
+        margin-left: 4px;
+      }
     }
   }
-}
 
-.action-btns {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 38px;
+  &__applicant {
+    &-section {
+      margin-top: 24px;
+    }
 
-  .btn {
+    &-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+
+    &-list {
+      margin-top: 12px;
+      max-height: 100px;
+      overflow: scroll;
+
+      >div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .t-cell {
+        border-radius: 9px;
+        height: 82px;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 38px;
+  }
+
+  &__action-button {
     height: 48px;
   }
 }
 
-.share-action-sheet {
-  .share-popup-content {
-    border-bottom: 0.5px solid var(--td-border-level-1-color);
-    padding-bottom: 8px;
-  }
-
-  .share-section {
+.share-sheet {
+  &__content {
     display: flex;
     flex-direction: column;
     padding-top: 16px;
 
-    .section-title {
+    &-title {
       font-size: 14px;
       font-weight: 400;
       line-height: 22px;
@@ -117,7 +114,7 @@
       margin-left: 16px;
     }
 
-    .section-list {
+    &-list {
       display: flex;
       flex-direction: row;
       padding: 16px 0 12px;
@@ -125,37 +122,36 @@
       width: 100%;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-
-      .section-item {
-        width: 80px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0 20px;
-        gap: 8px;
-
-        .section-img {
-          height: 40px;
-          width: 40px;
-
-          &.section-img--0{
-            border-radius: 50%;
-          }
-        }
-
-        .section-name {
-          font-size: 12px;
-          font-weight: 400;
-          text-align: center;
-          line-height: 20px;
-          white-space: nowrap;
-        }
-      }
     }
   }
-}
 
+  &__item {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    gap: 8px;
 
-.rectangle-button {
-  border-radius: 0;
+    &-image {
+      height: 40px;
+      width: 40px;
+
+      &--rounded {
+        border-radius: 50%;
+      }
+    }
+
+    &-name {
+      font-size: 12px;
+      font-weight: 400;
+      text-align: center;
+      line-height: 20px;
+      white-space: nowrap;
+    }
+  }
+
+  &__cancel-button {
+    border-radius: 0;
+  }
 }

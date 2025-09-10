@@ -16,8 +16,8 @@ import { stringify } from 'qs';
 import { ContentTypeEnum } from '@/constants';
 import type { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
 
-import { AxiosCanceler } from './AxiosCancel';
-import type { CreateAxiosOptions } from './AxiosTransform';
+import { AxiosCanceler } from './axiosCancel';
+import type { CreateAxiosOptions } from './axiosTransform';
 
 /**
  * Axios 模块

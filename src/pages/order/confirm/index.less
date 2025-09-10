@@ -1,52 +1,126 @@
 .order-confirm-container {
   background-color: var(--td-bg-color-container);
   padding: 0 16px;
+
+  &__actions {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    padding-bottom: calc(16px + constant(safe-area-inset-bottom));
+    border-top: 1px solid var(--td-border-level-1-color);
+    background-color: var(--td-bg-color-container);
+
+    &-info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+
+      .total-price {
+        color: var(--td-brand-color);
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+      }
+    }
+
+    .btn {
+      width: 201px;
+    }
+  }
 }
 
-.ticket-price-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 
-  .ticket-price-item {
+.event-info {
+  padding: 16px 0;
+  background-color: var(--td-bg-color-container);
+  border-bottom: 0.5px solid var(--td-border-level-1-color);
+
+  &__title {
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    line-height: 28px;
+  }
+
+  &__details {
     display: flex;
-    align-items: center;
-    position: relative;
+    flex-direction: row;
+    gap: 16px;
+    color: var(--td-text-color-primary);
 
-    .ticket-price {
-      text-align: right;
-      font-size: 16px;
+    &-item {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
       font-weight: 400;
+      line-height: 22px;
 
-      .current-price {
-        font-weight: 600;
-        color: var(--td-text-color-primary);
-      }
-
-      .original-price {
-        color: var(--td-text-color-secondary);
-        margin-left: 4px;
-        text-decoration: line-through;
+      .t-icon {
+        margin-right: 4px;
+        color: var(--td-brand-color);
       }
     }
   }
 }
 
-.t-checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.section-container {
+  padding: 18px 0 6px;
+  background-color: var(--td-bg-color-container);
 
-  .t-checkbox {
-    width: 100%;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
 
-    :deep(.t-checkbox__content) {
-      display: flex;
-      justify-content: space-between;
+    &-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
     }
 
-    :deep(.t-checkbox__title + .t-checkbox__description:not(:empty)) {
-      margin-top: 0;
+    .t-button {
+      :deep(.t-button__content) {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      &--price {
+        text-align: right;
+        font-size: 16px;
+        font-weight: 400;
+
+        .current-price {
+          font-weight: 600;
+          color: var(--td-text-color-primary);
+        }
+
+        .original-price {
+          color: var(--td-text-color-secondary);
+          margin-left: 4px;
+          text-decoration: line-through;
+        }
+      }
     }
   }
 }
@@ -101,94 +175,21 @@
   }
 }
 
-.event-info {
-  padding: 16px 0;
-  background-color: var(--td-bg-color-container);
-  border-bottom: 0.5px solid var(--td-border-level-1-color);
-
-  .event-title {
-    margin-bottom: 8px;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: left;
-    line-height: 28px;
-  }
-
-  .event-details {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    color: var(--td-text-color-primary);
-
-    .detail-item {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 22px;
-
-      .t-icon {
-        margin-right: 4px;
-        color: var(--td-brand-color);
-      }
-    }
-  }
-}
-
-.section-container {
-  padding: 18px 0 6px;
-  background-color: var(--td-bg-color-container);
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
-
-    .t-button {
-      :deep(.t-button__content) {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-    }
-  }
-
-  .section-title {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-  }
-}
-
-.bottom-btn {
-  position: fixed;
+.t-checkbox-group {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  padding: 16px;
-  padding-bottom: calc(16px + env(safe-area-inset-bottom));
-  padding-bottom: calc(16px + constant(safe-area-inset-bottom));
-  border-top: 1px solid var(--td-border-level-1-color);
-  background-color: var(--td-bg-color-container);
+  flex-direction: column;
+  gap: 12px;
 
-  .price-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
+  .t-checkbox {
+    width: 100%;
 
-    .total-price {
-      color: var(--td-brand-color);
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 28px;
+    :deep(.t-checkbox__content) {
+      display: flex;
+      justify-content: space-between;
     }
-  }
 
-  .btn {
-    width: 201px;
+    :deep(.t-checkbox__title + .t-checkbox__description:not(:empty)) {
+      margin-top: 0;
+    }
   }
 }

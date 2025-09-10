@@ -2,13 +2,13 @@
   <div class="order-confirm-container container-view">
     <!-- 活动信息 -->
     <div class="event-info">
-      <div class="event-title">{{ activityList.name }}</div>
-      <div class="event-details">
-        <div class="detail-item">
+      <div class="event-info__title">{{ activityList.name }}</div>
+      <div class="event-info__details">
+        <div class="event-info__details-item">
           <time-icon size="16px" />
           <span>{{ getDateRangeYMD(activityList) }}</span>
         </div>
-        <div class="detail-item">
+        <div class="event-info__details-item">
           <location-icon size="16px" />
           <span>{{ activityList.place || '-' }}</span>
         </div>
@@ -17,14 +17,14 @@
 
     <!-- 人员信息 -->
     <div class="section-container">
-      <div class="section-header">
-        <div class="section-title">{{ t('pages.order.detail.personList') }}</div>
+      <div class="section-container__header">
+        <div class="section-container__header-title">{{ t('pages.order.detail.personList') }}</div>
         <t-button size="extra-small" shape="round" @click="onAddPerson">
           <add-icon size="16px" />
           <span>{{ t('pages.order.detail.addPerson') }}</span>
         </t-button>
       </div>
-      <div class="attendees-list">
+      <div>
         <t-checkbox-group v-model:value="formData.personList" class="horizontal-box" borderless>
           <div
             v-for="person in users"
@@ -41,8 +41,8 @@
 
     <!-- 票类场次 -->
     <div class="section-container">
-      <div class="section-header">
-        <div class="section-title">{{ t('pages.order.detail.ticketTypes') }}</div>
+      <div class="section-container__header">
+        <div class="section-container__header-title">{{ t('pages.order.detail.ticketTypes') }}</div>
       </div>
       <div>
         <t-checkbox-group v-model:value="formData.date" borderless>
@@ -61,15 +61,15 @@
 
     <!-- 票档价格 -->
     <div class="section-container">
-      <div class="section-header">
-        <div class="section-title">{{ t('pages.order.detail.ticketPrice') }}</div>
+      <div class="section-container__header">
+        <div class="section-container__header-title">{{ t('pages.order.detail.ticketPrice') }}</div>
       </div>
-      <div class="ticket-price-list">
+      <div class="section-container__list">
         <t-checkbox-group v-model:value="formData.price" borderless>
           <div
             v-for="(price, index) in activityList.price"
             :key="index"
-            class="ticket-price-item card"
+            class="section-container__list-item card"
             :class="{ 'card--active': formData.price.includes((price as ActivityPrice).name || price) }"
           >
             <check-icon v-if="formData.price.includes((price as ActivityPrice).name || price)" class="card__icon" />
@@ -79,7 +79,7 @@
               :icon="false"
             >
               <template #content>
-                <div class="ticket-price">
+                <div class="section-container__list-item--price">
                   <span class="current-price">
                     {{ (price as ActivityPrice).discount || (price as ActivityPrice).price }}元
                   </span>
@@ -95,8 +95,8 @@
     </div>
 
     <!-- 底部按钮栏 -->
-    <div class="bottom-btn">
-      <div class="price-info">
+    <div class="order-confirm-container__actions">
+      <div class="order-confirm-container__actions-info">
         <span>{{ t('pages.order.detail.pendingPay') }}:</span>
         <span class="total-price">¥{{ totalPrice }}</span>
       </div>

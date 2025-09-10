@@ -1,17 +1,17 @@
 <template>
   <div class="home-container container-view">
     <t-sticky :offset-top="0" :z-index="100">
-      <div class="top-container">
+      <div class="home-container__top">
         <!-- 位置头部 -->
-        <div class="location-header">
-          <div class="location-info" @click="goToRegion">
+        <div class="home-container__top-location">
+          <div class="home-container__top-location-info" @click="goToRegion">
             <location-icon size="18px" />
             <span class="city-name">{{ currentCity }}</span>
           </div>
         </div>
 
         <!-- 搜索框 -->
-        <div class="search-bar">
+        <div class="home-container__top-search-bar">
           <t-search
             v-model="value"
             :clearable="true"
@@ -23,7 +23,7 @@
     </t-sticky>
 
     <!-- 热门推荐部分 -->
-    <div class="hot-recommendations">
+    <div class="home-container__recommendations">
       <div class="title-container">
         <div class="title-text">{{ t('pages.home.recommend') }}</div>
       </div>

@@ -1,33 +1,35 @@
 <template>
   <div class="result-page container-view">
-    <div class="result-status">
-      <check-circle-icon class="success-icon" size="70" color="#2BAA71" />
-      <span class="status-title"> 购买成功 </span>
+    <div class="result-page__status">
+      <check-circle-icon class="result-page__status-icon" size="70" color="#2BAA71" />
+      <span class="result-page__status-title"> 购买成功 </span>
     </div>
 
-    <div v-if="activity" class="activity-card">
-      <t-image :src="activity.fullImg || activity.img" fit="cover" class="activity-img" />
-      <div class="activity-info">
-        <span class="activity-title"> {{ activity.name }} </span>
-        <div class="activity-details">
+    <div v-if="activity" class="result-page__activity-card">
+      <t-image :src="activity.fullImg || activity.img" fit="cover" class="result-page__activity-card-image" />
+      <div class="result-page__activity-card-info">
+        <span class="result-page__activity-card-title"> {{ activity.name }} </span>
+        <div class="result-page__activity-card-details">
           <div>
             <time-icon size="16" color="#0052D9" />
-            <span class="activity-details-text">{{ dayjs(activity?.date?.[0]).format('YYYY年MM月DD日') }}</span>
+            <span class="result-page__activity-card-details-text">
+              {{ dayjs(activity?.date?.[0]).format('YYYY年MM月DD日') }}
+            </span>
           </div>
           <div>
             <location-icon size="16" color="#0052D9" />
-            <span class="activity-details-text">{{ activity.place || '-' }}</span>
+            <span class="result-page__activity-card-details-text">{{ activity.place || '-' }}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div v-if="users.length &gt; 0" class="applicant-wrapper">
-      <div class="applicant-title">
+    <div v-if="users.length &gt; 0" class="result-page__applicant-section">
+      <div class="result-page__applicant-title">
         <span>报名人员</span>
       </div>
-      <div class="applicant-list">
-        <div class="user-cell-list">
+      <div class="result-page__applicant-list">
+        <div>
           <t-cell
             v-for="user in users"
             :key="user.id"
@@ -43,9 +45,9 @@
       </div>
     </div>
 
-    <div class="action-btns">
+    <div class="result-page__actions">
       <t-button
-        class="btn"
+        class="result-page__action-button"
         theme="light"
         variant="outline"
         block
@@ -55,24 +57,36 @@
       >
         分享给朋友
       </t-button>
-      <t-button class="btn" theme="primary" size="medium" block @click="goToActivityDetail">去查看</t-button>
+      <t-button class="result-page__action-button" theme="primary" size="medium" block @click="goToActivityDetail">
+        去查看
+      </t-button>
     </div>
   </div>
 
-  <t-popup v-model:visible="shareActionSheetVisible" class="share-action-sheet" placement="bottom" destroy-on-close>
-    <div class="share-popup-content">
-      <div v-for="(item, listIndex) in shareActionSheet" :key="item.label" class="share-section">
-        <div class="section-title">{{ item.label }}</div>
-        <div class="section-list">
-          <div v-for="(icon, index) in item.children" :key="index" class="section-item">
-            <img :src="icon.img" class="section-img" :class="`section-img--${listIndex}`" />
-            <p class="section-name">{{ icon.label }}</p>
+  <t-popup v-model:visible="shareActionSheetVisible" class="share-sheet" placement="bottom" destroy-on-close>
+    <div style="border-bottom: 0.5px solid var(--td-border-level-1-color); padding-bottom: 8px">
+      <div v-for="(item, listIndex) in shareActionSheet" :key="item.label" class="share-sheet__content">
+        <div class="share-sheet__content-title">{{ item.label }}</div>
+        <div class="share-sheet__content-list">
+          <div v-for="(icon, index) in item.children" :key="index" class="share-sheet__item">
+            <img
+              :src="icon.img"
+              class="share-sheet__item-image"
+              :class="{ 'share-sheet__item-image--rounded': listIndex === 0 }"
+            />
+            <p class="share-sheet__item-name">{{ icon.label }}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <t-button class="rectangle-button" size="large" variant="text" block @click="shareActionSheetVisible = false">
+    <t-button
+      class="share-sheet__cancel-button"
+      size="large"
+      variant="text"
+      block
+      @click="shareActionSheetVisible = false"
+    >
       取消
     </t-button>
   </t-popup>
