@@ -1,0 +1,114 @@
+.user-page {
+  .flex-col();
+  background: var(--bg-color-secondarypage);
+  height: calc(100vh - var(--navbar-height) - var(--tabbar-height));
+  padding: 0 var(--td-spacer-2);
+}
+
+// 用户卡片区域
+.user-card {
+  .p-16();
+  .flex-center(space-between);
+  height: 96px;
+  background: var(--bg-color-page);
+  border-radius: var(--td-radius-extraLarge);
+
+  // 用户卡片信息区域
+  &__info {
+    .flex-center();
+    gap: var(--td-spacer-2);
+  }
+
+  &__avatar {
+    width: 64px;
+  }
+
+  &__meta {
+    .flex-col();
+    height: 54px;
+    max-width: calc(100vw - 180px);
+    justify-content: space-between;
+  }
+
+  &__name {
+    .font(16px, 600);
+    height: 24px;
+    margin-bottom: 8px;
+    color: var(--td-font-gray-1);
+  }
+
+  &__tag {
+    min-width: 0;
+    display: flex;
+    gap: var(--td-spacer);
+  }
+
+  .t-tag:nth-child(2) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // 用户卡片编辑按钮
+  &__edit {
+    .flex-center();
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+}
+
+// 活动列表区域
+.activity-list {
+  .flex-col();
+  margin-top: var(--td-spacer-2);
+  background: var(--bg-color-page);
+  border-top-left-radius: var(--td-radius-extraLarge);
+  border-top-right-radius: var(--td-radius-extraLarge);
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding-bottom: calc(var(--td-spacer-2) + constant(safe-area-inset-bottom));
+    padding-bottom: calc(var(--td-spacer-2) + env(safe-area-inset-bottom));
+  }
+}
+
+// 活动项
+.activity-item {
+  &__time {
+    .font(12px, 400);
+    margin-top: 4px;
+    color: var(--td-font-gray-2);
+  }
+
+  &__footer {
+    .flex-center(space-between);
+  }
+
+  &__status {
+    display: flex;
+  }
+
+  &__btn {
+    .font(14px, 400);
+    color: var(--td-brand-color-7);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+}
+
+@supports (height: 100dvh) {
+  // 移动端适配
+  .user-page {
+    height: calc(100dvh - var(--navbar-height) - var(--tabbar-height));
+  }
+}

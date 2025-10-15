@@ -1,0 +1,180 @@
+header {
+  z-index: 99;
+  position: fixed;
+  background: var(--bg-color-page);
+}
+
+main {
+  min-height: calc(100vh - var(--navbar-height));
+  background-color: #fff;
+  padding-bottom: 80px;
+}
+
+.activity-info {
+  .p-16();
+  .flex-col();
+  min-height: 90px;
+  top: var(--navbar-height);
+  background: var(--bg-color-page);
+  &::after {
+    content: '';
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 0;
+    height: 0.5px;
+    background-color: var(--td-gray-color-3);
+  }
+  &__title {
+    .font(20px, 600);
+    margin-bottom: 8px;
+  }
+  &__details {
+    .font();
+    gap: 16px;
+    height: 22px;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  &__detail-item {
+    .flex-center();
+    min-width: 0;
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .t-icon {
+      color: var(--td-brand-color-7);
+      margin-right: 4px;
+    }
+  }
+}
+
+.page-content {
+  .p-16();
+  margin-top: var(--navbar-height);
+}
+
+.section {
+  margin-bottom: 24px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &__header {
+    .flex-center(space-between);
+    margin-bottom: 14px;
+  }
+  &__title {
+    .font(16px, 600);
+  }
+}
+/* 人员信息网格布局 */
+
+.person-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.person-grid .card {
+  margin: 0;
+}
+
+/* 卡片样式 */
+
+.card {
+  position: relative;
+  margin: 12px 0;
+  border-radius: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid var(--td-gray-color-4);
+  padding: 0.5px 0.5px 0.5px 8.5px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.card--active {
+  padding: 0 0 0 8px;
+  border: 1.5px solid var(--td-brand-color-7);
+}
+
+.card--active::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  border: 14px solid var(--td-brand-color-7);
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+
+:deep(.t-radio) {
+  width: 100%;
+  padding-left: 0;
+}
+
+:deep(.t-checkbox) {
+  padding-left: 8px;
+}
+
+.card__icon {
+  color: #fff;
+  position: absolute;
+  left: 1.5px;
+  top: 1.5px;
+  z-index: 1;
+}
+
+/* 价格卡片内容布局 */
+
+.price-card {
+  width: 100%;
+  .flex-center(space-between);
+
+  /* 价格样式 */
+
+  &__info {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  &__current-price {
+    .font(16px, 600);
+  }
+
+  &__original-price {
+    .font(16px, 400);
+    color: var(--td-font-gray-2);
+    text-decoration: line-through;
+  }
+}
+
+.bottom-action {
+  .flex-center(space-between);
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 12px 16px;
+  border-top: 0.5px solid var(--td-gray-color-3);
+  &__info {
+    .flex-center();
+  }
+  &__price {
+    .font(20px, 600);
+    color: var(--td-brand-color-7);
+    margin-left: 8px;
+  }
+  .t-button {
+    width: 201px;
+  }
+}

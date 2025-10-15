@@ -1,0 +1,51 @@
+header {
+  position: fixed;
+  z-index: 999;
+}
+
+main {
+  min-height: 100vh;
+  background-color: var(--bg-color-page);
+  padding-bottom: 80px;
+}
+
+.container {
+  padding-top: 48px;
+}
+
+.bottom-action {
+  .p-16();
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+:deep(.t-form) {
+  .font(16px, 400);
+
+  .t-input__control::placeholder {
+    color: var(--td-font-gray-3);
+  }
+
+  .t-form__label--required label::before {
+    content: none;
+  }
+
+  .t-form__label--required label::after {
+    display: inline-block;
+    margin-left: 4px;
+    color: var(--td-error-color-6);
+    line-height: 20px;
+    content: '*';
+  }
+}
+
+.input-with-icon {
+  .flex-center(space-between);
+  width: 100%;
+
+  .t-icon {
+    color: var(--td-font-gray-3);
+  }
+}

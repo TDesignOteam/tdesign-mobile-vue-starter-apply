@@ -1,0 +1,125 @@
+.home-page {
+  background-image: url('https://tdesign.gtimg.com/tdesign-pro/doc/homepage-banner-bg-light.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+html.dark .home-page {
+  background-image: url('https://tdesign.gtimg.com/tdesign-pro/doc/homepage-banner-bg-dark.png');
+}
+
+/**
+ * Colors
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --td-brand-color-4: #8eabff;
+  --td-brand-color-5: #618dff;
+  --td-brand-color-7: #0052d9;
+
+  --td-warning-color-3: #ffb98c;
+  --td-warning-color-5: #e37318;
+  --td-warning-color-7: #954500;
+
+  --td-error-color-5: #f6685d;
+  --td-error-color-6: #d54941;
+  --td-error-color-7: #ad352f;
+
+  --td-success-color-5: #2ba471;
+
+  --vp-c-default-1: var(--vp-c-gray-1);
+  --vp-c-default-2: var(--vp-c-gray-2);
+  --vp-c-default-3: var(--vp-c-gray-3);
+  --vp-c-default-soft: var(--vp-c-gray-soft);
+
+  --vp-c-brand-1: var(--td-brand-color-7);
+  --vp-c-brand-2: var(--td-brand-color-5);
+  --vp-c-brand-3: var(--td-brand-color-4);
+  --vp-c-brand-soft: var(--vp-c-indigo-soft);
+
+  --vp-c-tip-1: var(--vp-c-brand-1);
+  --vp-c-tip-2: var(--vp-c-brand-2);
+  --vp-c-tip-3: var(--vp-c-brand-3);
+  --vp-c-tip-soft: var(--vp-c-brand-soft);
+
+  --vp-c-warning-1: var(--td-warning-color-7);
+  --vp-c-warning-2: var(--td-warning-color-5);
+  --vp-c-warning-3: var(--td-warning-color-3);
+  --vp-c-warning-soft: var(--vp-c-yellow-soft);
+
+  --vp-c-danger-1: var(--td-error-color-7);
+  --vp-c-danger-2: var(--td-error-color-6);
+  --vp-c-danger-3: var(--td-error-color-5);
+  --vp-c-danger-soft: var(--vp-c-red-soft);
+}
+
+html.dark {
+  --vp-c-brand-1: var(--td-brand-color-4);
+  --vp-c-brand-3: var(--td-brand-color-7);
+  --vp-c-warning-1: var(--td-warning-color-3);
+  --vp-c-warning-3: var(--td-warning-color-7);
+  --vp-c-danger-1: var(--td-error-color-5);
+  --vp-c-danger-3: var(--td-error-color-7);
+}
+
+/**
+ * Component: Button
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-bg: var(--vp-c-brand-3);
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: var(--vp-c-white);
+  --vp-button-brand-active-bg: var(--vp-c-brand-1);
+}
+
+/**
+ * Component: Home
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    var(--td-success-color-5) 30%,
+    var(--td-brand-color-5) 70%,
+    var(--td-brand-color-7)
+  );
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(56px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
+}
+
+/**
+ * Component: Custom Block
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-custom-block-tip-border: transparent;
+  --vp-custom-block-tip-text: var(--vp-c-text-1);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
+  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+}
+
+/**
+ * Component: Algolia
+ * -------------------------------------------------------------------------- */
+
+.DocSearch {
+  --docsearch-primary-color: var(--vp-c-brand-1) !important;
+}
